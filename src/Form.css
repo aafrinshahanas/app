@@ -1,0 +1,17 @@
+.form{
+    
+}
+
+{this.state.shown?
+    <Form/>
+    :
+               <button value="submit" onClick={this.signUp}> Sign Up</button>
+              
+                
+             }   
+             {this.state.shown1?
+             <Signin/>
+             :
+              <button value="submit" onClick={this.signIn}> Sign In</button>
+              
+             }
