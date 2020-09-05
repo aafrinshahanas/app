@@ -1,0 +1,24 @@
+button{
+    text-align: center;
+    border: 2px solid mediumseagreen;
+    padding: 10px; 
+    border-radius: 5px; 
+    margin: 10px 5px 0px;
+}
+
+button:hover{
+    border: 2px solid brown;
+    font-weight: 10px;
+    padding: 8px;
+}
+
+input{
+    padding: 10px;
+    margin: 10px;
+    border-left-color: cornsilk;
+    border-radius: 3px;
+}
+
+.Text{
+    margin: 15px;
+}
