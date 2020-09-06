@@ -25,7 +25,9 @@ class List extends Component {
 
     addOpp = (event) =>{
      event.preventdefault();
-     this.setState({total: parseInt(this.state.num1) + parseInt(this.state.num2)});
+     this.setState(prevState => ({
+        total: [...prevState.total, parseInt(this.state.num1) + parseInt(this.state.num2)]
+      }))
     }
 
     subOpp = (event) =>{
@@ -44,9 +46,8 @@ class List extends Component {
        }
 
     render() {
-        const result = this.state.total.map((item) =>{
-            return<div>{item.total}</div>
-        });
+        const result = 
+        console.log(this.state.total);
     
         return (
             <div className="style">
@@ -63,7 +64,9 @@ class List extends Component {
             <div className="Text">
             value:{this.state.total}
             <br/>
-             list:{result}
+             list:{this.state.total.map((item) =>{
+            return<div>{item.total}</div>
+        })}
              </div>
             </div>
             
