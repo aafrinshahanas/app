@@ -1,90 +1,100 @@
 import React, { Component } from 'react'
 import { data } from 'jquery';
 
-const map = () =>{this.state.data.map((item)=>
-    <div>{this.state.total}</div>
-    )}  
-console.log(map);
 class List extends Component {
-    constructor(props) {
-        super(props)
 
-        this.state = {
-           data:[ 
-            {num1: "", num2: "", total: ""}
-        
-           ]
-                 
-        }
+    state = {
+        fieldOne: "",
+        fieldTwo: "",
+        result: "",
+        list: []
     }
 
-    num1 = (event) =>{
+    num1 = (event) => {
         this.setState({
-            num1: event.target.value
+            fieldOne: event.target.value
         })
     }
 
     num2 = (event) => {
         this.setState({
-            num2: event.target.value
+            fieldTwo: event.target.value
         })
     }
 
-    addOpp = (event) =>{
-
-     this.setState({total: parseInt(this.state.num1) + parseInt(this.state.num2)});
-     event.prevent.default();
-    
+    addOpp = (event) => {
+        event.preventDefault();
+        this.setState({ result: parseInt(this.state.fieldOne) + parseInt(this.state.fieldTwo) },
+            (prevState) => {
+                this.setState({
+                    fieldOne: "",
+                    fieldTwo: "",
+                    list: this.state.list.concat(this.state.result)
+                })
+            });
     }
-    subOpp = (event) =>{
+    subOpp = (event) => {
+        event.preventDefault();
+        this.setState({ result: parseInt(this.state.fieldOne) - parseInt(this.state.fieldTwo) },
+            () => {
+                this.setState({
+                    fieldOne: "",
+                    fieldTwo: "",
+                    list: this.state.list.concat(this.state.result)
+                })
+            });
+    }
 
-        this.setState({total: parseInt(this.state.num1) - parseInt(this.state.num2)});
-        event.prevent.default();
-       
-       }
+    mulOpp = (event) => {
+        event.preventDefault();
+        this.setState({ result: parseInt(this.state.fieldOne) * parseInt(this.state.fieldTwo) },
+            () => {
+                this.setState({
+                    fieldOne: "",
+                    fieldTwo: "",
+                    list: this.state.list.concat(this.state.result)
+                })
+            });
+    }
+    divOpp = (event) => {
+        event.preventDefault();
+        this.setState({ result: parseInt(this.state.fieldOne) / parseInt(this.state.fieldTwo) },
+            () => {
+                this.setState({
+                    fieldOne: "",
+                    fieldTwo: "",
+                    list: this.state.list.concat(this.state.result)
+                })
+            });
+    }
 
-    mulOpp = (event) =>{
+    // deleteEvent = (index, e) => {
+    //     data.splice(index, 1);
+    //     this.setState({ data: this.state.data })
+    // }
 
-        this.setState({total: parseInt(this.state.num1) * parseInt(this.state.num2)});
-        event.prevent.default();
-       
-       }
-    divOpp = (event) =>{
-
-        this.setState({total: parseInt(this.state.num1) / parseInt(this.state.num2)});
-        event.prevent.default();
-       
-       }
-
-       deleteEvent = (index, e) => {
-           
-            data.splice(index,1);
-            this.setState({data: this.state.data})
-
-       }
-       
     render() {
         return (
             <div>
-            <form>
-                <input type="text" value={this.state.num1} onChange={this.num1}/>
-                <input type="text" value={this.state.num2} onChange={this.num2}/><br/><br/>
-                <button onClick={this.addOpp}>ADD</button><br/>
-                <button onClick={this.subOpp}>SUB</button><br/>
-                <button onClick={this.mulOpp}>MUL</button><br/>
-                <button onClick={this.divOpp}>DIV</button><br/>
-                <button type="reset">RESET</button>
-                
-            </form> 
-            value:{this.state.total}
-            <br/>
-            map:{this.state.data.map((item,index)=>
-            <div>{this.state.total}
+                <form>
+                    <input type="text" value={this.state.fieldOne} onChange={this.num1} />
+                    <input type="text" value={this.state.fieldTwo} onChange={this.num2} /><br /><br />
+                    <button onClick={this.addOpp}>ADD</button><br />
+                    <button onClick={this.subOpp}>SUB</button><br />
+                    <button onClick={this.mulOpp}>MUL</button><br />
+                    <button onClick={this.divOpp}>DIV</button><br />
+                    <button type="reset">RESET</button>
+
+                </form>
+                    value:{this.state.result}
+                <br />
+                <ul>
+                    {this.state.list.map((item, index) =>
+                        <div>{item}
+                        </div>
+                    )}
+                </ul>
             </div>
-            )}  
-            
-            </div>
-            
         )
     }
 }
